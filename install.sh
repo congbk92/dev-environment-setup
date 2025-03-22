@@ -54,8 +54,8 @@ CUR_DIR=$(pwd)
 # Symlink configuration files
 mkdir -p ~/.config
 ln -sf $CUR_DIR/nvim ~/.config/nvim
-#ln -sf $CUR_DIR/zsh/.zshrc ~/.zshrc
 ln -sf $CUR_DIR/tmux/.tmux.conf ~/.tmux.conf
+
 
 # Install Oh My Zsh
 if [ -d $ZSH ]; then
@@ -63,5 +63,8 @@ if [ -d $ZSH ]; then
 else
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
+
+#Install powerlevel10k
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git "${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k"
 
 echo "Installation complete."
