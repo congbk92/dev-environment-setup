@@ -56,10 +56,8 @@ mkdir -p ~/.config
 ln -sf $CUR_DIR/nvim ~/.config/nvim
 ln -sf $CUR_DIR/tmux/.tmux.conf ~/.tmux.conf
 
-
-# Install Oh My Zsh
-if [ -d $ZSH ]; then
-    echo "Oh My Zsh already installed in $ZSH"
+if [ -d "$HOME/.oh-my-zsh" ]; then
+    echo "Oh My Zsh is already installed at $HOME/.oh-my-zsh."
 else
     sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 fi
