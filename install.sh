@@ -15,21 +15,8 @@ update_path() {
 
 # Function to determine the current shell and update PATH
 install_path_update() {
-    # Determine the current shell
-    current_shell=$(basename "$SHELL")
-    # Directory to be added to PATH
-    new_dir=$1
-    case $current_shell in
-        bash)
-            update_path "$HOME/.bashrc" "$new_dir"
-            ;;
-        zsh)
-            update_path "$HOME/.zshrc" "$new_dir"
-            ;;
-        *)
-            echo "Unsupported shell: $current_shell"
-            ;;
-    esac
+    local new_dir=$1
+    update_path "$HOME/.zshrc" "$new_dir"
     # Reload the shell configuration
     source "$HOME/.${current_shell}rc"
 }
@@ -48,10 +35,9 @@ mkdir -p ~/.packages/nvim
 wget -O ~/.packages/nvim/nvim-linux-x86_64.tar.gz https://github.com/neovim/neovim/releases/download/$NVIM_VERSION/nvim-linux-x86_64.tar.gz
 tar -zxvf ~/.packages/nvim/nvim-linux-x86_64.tar.gz -C ~/.packages/nvim/
 install_path_update "~/.packages/nvim/nvim-linux-x86_64/bin"
-CUR_DIR=$(pwd)
-
 
 # Symlink configuration files
+CUR_DIR=$(pwd)
 mkdir -p ~/.config
 ln -sf $CUR_DIR/nvim ~/.config/nvim
 ln -sf $CUR_DIR/tmux/.tmux.conf ~/.tmux.conf
