@@ -1,17 +1,17 @@
-# Download the latest stable Go for Linux (x86-64)
-wget "https://go.dev/dl/$(curl -s https://go.dev/dl/ | grep -oP 'go[0-9.]+\.linux-amd64\.tar\.gz' | head -n 1)"
+#!/bin/bash
 
-# Extract to ~/.local/go (or any dir in your home)
-mkdir -p ~/.local
-rm -rf ~/.local/go && tar -C ~/.local -xzf go*.tar.gz
-rm go*.tar.gz*
+GO_VERSION="1.24.2"
+INSTALL_DIR="$HOME/.local/go"
+BIN_DIR="$HOME/.local/bin"
 
-# Add Go to PATH (add to ~/.bashrc, ~/.zshrc, or ~/.profile)
-INSTALL_DIR="~/.local/go/bin"
-if grep -q "export PATH=.*$INSTALL_DIR" ~/.zshrc; then
-    echo "PATH already contains $INSTALL_DIR"
-else
-    echo "export PATH=\$PATH:${INSTALL_DIR}" >> ~/.zshrc
-    echo "PATH updated in ~/.zshrc by append $INSTALL_DIR" 
-    echo "run 'source ~/.zshrc' to take effective"
-fi
+echo "Installing Go to $INSTALL_DIR..."
+
+# Download and extract Go
+mkdir -p "$INSTALL_DIR"
+curl -L "https://go.dev/dl/go${GO_VERSION}.linux-amd64.tar.gz" | tar -xz -C "$INSTALL_DIR" --strip-components=1
+
+# Link binaries
+ln -sf "$INSTALL_DIR/bin/go" "$BIN_DIR/go"
+ln -sf "$INSTALL_DIR/bin/gofmt" "$BIN_DIR/gofmt"
+
+echo "Go installed successfully!"
