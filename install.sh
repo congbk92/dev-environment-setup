@@ -20,3 +20,4 @@ find . -mindepth 2 -name "install.sh" -exec bash -c '
 echo "Installations complete."
 echo "Don't forget to update ~/.zshrc by: "
 echo "source ${PWD}/bashrc.sh"
+echo " eval \"$(fzf --zsh)\""
