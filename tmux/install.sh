@@ -1,3 +1,5 @@
 CUR_DIR=$(pwd)
 mkdir -p ~/.config
-ln -sf $CUR_DIR/tmux/.tmux.conf ~/.tmux.conf
+current_file_path=$(realpath "$0")
+root_path=$(dirname "$current_file_path")
+ln -sf ${root_path}/.tmux.conf ~/.tmux.conf
