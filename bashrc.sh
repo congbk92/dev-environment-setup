@@ -8,7 +8,8 @@ fi
 #!/bin/bash
 
 # Get absolute path of this script
-ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+current_file_path=$(realpath "$0")
+ROOT_DIR=$(dirname "$current_file_path")
 
 # echo "Sourcing configurations from $ROOT_DIR..."
 
