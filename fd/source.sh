@@ -1,24 +1,5 @@
 #!/bin/bash
 
-# Configure environment for fd
-
-TOOL_NAME="fd"
-BINARY_PATH="$HOME/.local/bin/fd"
-
-if ! command -v "$BINARY_PATH" &> /dev/null; then
-    echo "$TOOL_NAME is not installed in $BINARY_PATH"
-    read -p "Would you like to install it now? (y/n) " -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-        bash "$DIR/install.sh"
-    else
-        return 1
-    fi
-fi
-
-# -- Use fd instead of fzf --
-
 export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"

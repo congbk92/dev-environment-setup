@@ -1,15 +1,10 @@
 #!/bin/bash
-
-# Update and install dependencies
-# sudo apt-get update
-# sudo apt-get install -y zsh tmux curl git
-
-# Install dependencies for nvim
-# sudo apt-get install -y make unzip gcc ripgrep
-
-#!/bin/bash
-
 echo "Running all install.sh scripts..."
+
+ln -sfnT "${PWD}/devbox/devbox.json" ~/.local/share/devbox/global/default/devbox.json
+ln -sfnT "${PWD}/devbox/devbox.lock" ~/.local/share/devbox/global/default/devbox.lock
+
+devbox global install
 
 find . -mindepth 2 -name "install.sh" -exec bash -c '
     dir="$(dirname "{}")"

@@ -1,26 +1,7 @@
 #!/bin/bash
 
 # Configure environment for eza
-
-TOOL_NAME="eza"
-BINARY_PATH="$HOME/.local/bin/eza"
-
-if ! command -v "$BINARY_PATH" &> /dev/null; then
-    echo "$TOOL_NAME is not installed in $BINARY_PATH"
-    read -p "Would you like to install it now? (y/n) " -n 1 -r
-    echo
-    if [[ $REPLY =~ ^[Yy]$ ]]; then
-        DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-        bash "$DIR/install.sh"
-    else
-        return 1
-    fi
-fi
-
-# Add ~/.local/bin to PATH if not already there
-if [[ ":$PATH:" != *":$HOME/.local/bin:"* ]]; then
-    export PATH="$HOME/.local/bin:$PATH"
-fi
+BINARY_PATH="$(which eza)"
 
 # Set up alias for ls if not already set
 if ! alias ls &> /dev/null; then
@@ -46,5 +27,3 @@ _fzf_comprun() {
     *)            fzf --preview "$show_file_or_dir_preview" "$@" ;;
   esac
 }
-
-# echo "$TOOL_NAME environment configured."
