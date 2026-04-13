@@ -13,7 +13,10 @@
     "go@latest",
     "git@latest",
     "fd@latest",
-    "fzf@latest"
+    "fzf@latest",
+    "zstd@latest",
+    "ollama@latest",
+    "claude-code@latest"
   ],
   "shell": {
     "init_hook": [
