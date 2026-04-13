@@ -26,7 +26,7 @@ eval "$(devbox global shellenv)"
 
 5. Clone the repository and run the installation script:
 ```sh
-git clone https://github.com/yourusername/dev-environment-setup.git
+git clone https://github.com/congbk92/dev-environment-setup.git
 cd dev-environment-setup
 ./install.sh
 ```

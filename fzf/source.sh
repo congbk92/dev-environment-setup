@@ -21,4 +21,8 @@ _fzf_compgen_path() {
 _fzf_compgen_dir() {
   fd --type=d --hidden --exclude .git . "$1"
 }
-source $HOME/.local/fzf-git/fzf-git.sh
+
+# Source fzf-git if installed
+if [ -f "$HOME/.local/fzf-git/fzf-git.sh" ]; then
+  source "$HOME/.local/fzf-git/fzf-git.sh"
+fi

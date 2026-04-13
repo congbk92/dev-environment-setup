@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 # Possible Oh My Zsh locations to check
 possible_zsh_locations=(
@@ -27,5 +27,5 @@ if [ -z "$found_zsh" ]; then
 else
   ZSH_THEME="powerlevel10k/powerlevel10k"
   plugins+=(aliases ubuntu history zsh-autosuggestions bazel emotty)
-  source $ZSH/oh-my-zsh.sh
+  source "$ZSH/oh-my-zsh.sh"
 fi

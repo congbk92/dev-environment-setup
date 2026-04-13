@@ -1,0 +1,77 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install shellcheck
+        run: sudo apt-get install -y shellcheck
+
+      - name: Run shellcheck
+        run: |
+          find . -name "*.sh" -type f -not -path "./devbox/.devbox/*" -exec shellcheck -x {} \;
+
+  validate-json:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate devbox.json
+        run: python3 -c "import json; json.load(open('devbox/devbox.json'))"
+
+      - name: Validate devbox.lock
+        run: python3 -c "import json; json.load(open('devbox/devbox.lock'))"
+
+  test-setup:
+    runs-on: ubuntu-latest
+    container:
+      image: ubuntu:24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          apt-get update
+          apt-get install -y curl git ca-certificates
+
+      - name: Install Nix
+        run: |
+          curl --proto '=https' --tlsv1.2 -sSf https://nixos.org/nix/install | sh -s -- --no-daemon
+          echo "source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh" >> $GITHUB_ENV
+
+      - name: Install devbox
+        run: |
+          curl -fsSL https://get.jetify.com/devbox | bash
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - name: Run install script
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          chmod +x install.sh
+          ./install.sh
+        env:
+          HOME: /root
+
+      - name: Verify symlinks
+        run: |
+          ls -la ~/.local/share/devbox/global/default/devbox.json || true
+          ls -la ~/.local/share/devbox/global/default/devbox.lock || true
+          test -L ~/.local/share/devbox/global/default/devbox.json
+          test -L ~/.local/share/devbox/global/default/devbox.lock
+        env:
+          HOME: /root
+
+      - name: Verify packages installed
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          devbox global list
+        env:
+          HOME: /root
