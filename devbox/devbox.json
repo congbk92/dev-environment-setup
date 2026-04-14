@@ -16,7 +16,8 @@
     "fzf@latest",
     "zstd@latest",
     "ollama@latest",
-    "claude-code@latest"
+    "claude-code@latest",
+    "cudatoolkit@latest"
   ],
   "shell": {
     "init_hook": [

@@ -49,6 +49,12 @@
         }
       }
     },
+    "cudatoolkit@latest": {
+      "last_modified": "2023-02-24T09:01:09Z",
+      "resolved": "github:NixOS/nixpkgs/7d0ed7f2e5aea07ab22ccb338d27fbe347ed2f11#cudatoolkit",
+      "source": "devbox-search",
+      "version": "11.7.0"
+    },
     "eza@latest": {
       "last_modified": "2026-02-23T15:40:43Z",
       "resolved": "github:NixOS/nixpkgs/80d901ec0377e19ac3f7bb8c035201e2e098cc97#eza",
