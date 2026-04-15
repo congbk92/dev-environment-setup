@@ -15,7 +15,6 @@
     "fd@latest",
     "fzf@latest",
     "zstd@latest",
-    "ollama@latest",
     "claude-code@latest",
     "cudatoolkit@latest"
   ],
