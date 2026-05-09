@@ -19,20 +19,13 @@ curl -fsSL https://get.jetify.com/devbox | bash
 sudo apt install zsh
 ```
 
-4. Enable devbox global package by add the following into `~/.zshrc`
-```sh
-eval "$(devbox global shellenv)"
-```
-
-5. Clone the repository and run the installation script:
+4. Clone the repository and run the installation script:
 ```sh
 git clone https://github.com/congbk92/dev-environment-setup.git
 cd dev-environment-setup
 ./install.sh
 ```
 
-6. Update ~/.zshrc as the ouput of the previous step.
+5. `source ~/.zshrc` and enter prompt to config.
 
-7. `source ~/.zshrc` and enter prompt to config.
-
-8. [Install nerd font](https://github.com/romkatv/powerlevel10k?tab=readme-ov-file#meslo-nerd-font-patched-for-powerlevel10k)
+6. [Install nerd font](https://github.com/romkatv/powerlevel10k?tab=readme-ov-file#meslo-nerd-font-patched-for-powerlevel10k)
