@@ -15,7 +15,9 @@
     "fd@latest",
     "fzf@latest",
     "zstd@latest",
-    "claude-code@latest"
+    "claude-code@latest",
+    "pnpm@latest",
+    "nodejs@latest"
   ],
   "shell": {
     "init_hook": [
