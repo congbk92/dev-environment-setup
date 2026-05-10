@@ -7,7 +7,7 @@ set -e
 FZF_GIT_DIR="$HOME/.local/fzf-git"
 
 # Install fzf-git if not already available
-if [ -f "$FZF_GIT_DIR/fzf-git.sh" ] && command -v __fzf_git &> /dev/null; then
+if [ -f "$FZF_GIT_DIR/fzf-git.sh" ]; then
     echo "fzf-git is already installed at $FZF_GIT_DIR"
     read -p "Would you like to reinstall fzf-git? [y/N] " -n 1 -r
     echo

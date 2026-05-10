@@ -15,18 +15,18 @@ Run `./install.sh` from the repository root. This:
 
 After installation, add to `~/.zshrc`:
 ```sh
-source /path/to/this/repo/bashrc.sh
+source /path/to/this/repo/zshrc.sh
 eval "$(fzf --zsh)"
 ```
 
 ## Architecture
 
 ### Component Structure
-Each component directory (`tmux/`, `oh-my-zsh/`, `nvim/`, `fzf/`, `eza/`, `fd/`) follows a pattern:
+Each component directory (`tmux/`, `oh-my-zsh/`, `nvim/`, `fzf/`, `eza/`) follows a pattern:
 - `install.sh` - Run once during setup (creates symlinks, installs dependencies)
-- `source.sh` - Sourced by `bashrc.sh` for shell configuration (aliases, env vars, functions)
+- `source.sh` - Sourced by `zshrc.sh` for shell configuration (aliases, env vars, functions)
 
-### bashrc.sh
+### zshrc.sh
 The entry point that discovers and sources all `source.sh` files throughout the repository. It also prepends `~/.local/bin` to `PATH`. Adding a new component only requires creating a directory with a `source.sh` file.
 
 ### devbox/devbox.json
@@ -38,11 +38,10 @@ Defines globally installed packages via [devbox](https://www.jetify.com/devbox):
 | Directory   | install.sh | source.sh | Notes |
 |-------------|-----------|-----------|-------|
 | `fzf/`      | Yes       | Yes       | Installs fzf-git to `~/.local/fzf-git/`; sets FZF defaults with fd backend |
-| `fd/`       | No        | Yes       | Sets FZF env vars to use fd (subset of `fzf/source.sh`) |
 | `eza/`      | No        | Yes       | Aliases `ls` to eza; adds fzf preview using eza/bat |
 | `nvim/`     | Yes       | Yes       | Symlinks `nvim/config/` → `~/.config/nvim`; sets `$EDITOR=nvim` |
 | `oh-my-zsh/`| Yes       | Yes       | Installs Oh My Zsh + powerlevel10k theme + zsh-autosuggestions |
-| `tmux/`     | Yes       | No        | Symlinks `tmux/.tmux.conf` → `~/.tmux.conf` |
+| `tmux/`     | Yes       | Yes (empty) | Symlinks `tmux/.tmux.conf` → `~/.tmux.conf` |
 
 ### nvim/config
 A git submodule (fork of kickstart.nvim). Custom plugins go in `nvim/config/lua/custom/plugins/`. The main `init.lua` imports from `custom.plugins` automatically.
@@ -55,11 +54,11 @@ Plugins enabled: `aliases`, `ubuntu`, `history`, `zsh-autosuggestions`, `bazel`,
 Theme: `powerlevel10k/powerlevel10k`
 
 ### tmux
-Config (`tmux/.tmux.conf`) enables mouse, 256-color terminal, and sets escape-time to 10ms. No `source.sh` (tmux config is static).
+Config (`tmux/.tmux.conf`) enables mouse, 256-color terminal, and sets escape-time to 10ms. `source.sh` exists but is empty — add tmux shell aliases/env vars there if needed.
 
 ## Key Commands
 
 - Run full setup: `./install.sh`
-- Source all configs: `source bashrc.sh` (or add to `.zshrc`)
+- Source all configs: `source zshrc.sh` (or add to `.zshrc`)
 - Nvim plugins: `:Lazy` in neovim to manage plugins
 - Nvim LSP tools: `:Mason` to manage LSP servers and formatters

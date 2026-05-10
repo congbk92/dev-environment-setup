@@ -1,5 +1,6 @@
-CUR_DIR=$(pwd)
-mkdir -p ~/.config
-current_file_path=$(realpath "$0")
-root_path=$(dirname "$current_file_path")
-ln -sf ${root_path}/.tmux.conf ~/.tmux.conf
+#!/bin/bash
+
+set -e
+
+root_path="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ln -sf "${root_path}/.tmux.conf" ~/.tmux.conf

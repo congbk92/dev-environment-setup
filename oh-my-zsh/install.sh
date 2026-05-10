@@ -8,7 +8,7 @@ if [ -d "$HOME/.oh-my-zsh" ]; then
     [yY][eE][sS]|[yY])
       # Proceed with reinstall
       echo "Preparing to reinstall Oh My Zsh..."
-      mv $HOME/.oh-my-zsh $HOME/.oh-my-zsh.bk
+      mv "$HOME/.oh-my-zsh" "$HOME/.oh-my-zsh.bk"
       ;;
     *)
       echo "Installation cancelled."

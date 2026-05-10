@@ -1,11 +1,7 @@
 #!/bin/bash
 
-# Configure environment for eza
-BINARY_PATH="$(which eza)"
-
-# Set up alias for ls if not already set
-if ! alias ls &> /dev/null; then
-    alias ls="$BINARY_PATH"
+if ! alias ls &>/dev/null; then
+    alias ls="eza"
 fi
 
 show_file_or_dir_preview="if [ -d {} ]; then eza --tree --color=always {} | head -200; else bat -n --color=always --line-range :500 {}; fi"

@@ -25,17 +25,17 @@ devbox global install
 
 # --- Component installers ---
 step "Running component installers..."
-while IFS= read -r -d '' script; do
+while IFS= read -r -d '' script <&3; do
     dir="$(dirname "$script")"
     echo -e "\n${BOLD}--- $(basename "$dir") ---${NC}"
-    (cd "$dir" && bash install.sh) || warn "$(basename "$dir") installer failed (continuing)"
-done < <(find "$ROOT_DIR" -mindepth 2 -name ".git" -prune -o -name "install.sh" -type f -print0 | sort -z)
+    (bash "$script") || warn "$(basename "$dir") installer failed (continuing)"
+done 3< <(find "$ROOT_DIR" -mindepth 2 -name ".git" -prune -o -name "install.sh" -type f -print0 | sort -z)
 
 # --- ~/.zshrc update ---
 step "Updating ~/.zshrc..."
 ZSHRC="$HOME/.zshrc"
 DEVBOX_LINE='eval "$(devbox global shellenv)"'
-BASHRC_LINE="source ${ROOT_DIR}/bashrc.sh"
+ZSHRC_LINE="source ${ROOT_DIR}/zshrc.sh"
 FZF_LINE='eval "$(fzf --zsh)"'
 
 add_if_missing() {
@@ -51,12 +51,12 @@ add_if_missing() {
 read -rp "Automatically update ~/.zshrc? [y/N] " reply
 if [[ "${reply,,}" == "y" ]]; then
     add_if_missing "$DEVBOX_LINE"
-    add_if_missing "$BASHRC_LINE"
+    add_if_missing "$ZSHRC_LINE"
     add_if_missing "$FZF_LINE"
 else
     warn "Skipped ~/.zshrc update. Add the following lines manually:"
     echo "  $DEVBOX_LINE"
-    echo "  $BASHRC_LINE"
+    echo "  $ZSHRC_LINE"
     echo "  $FZF_LINE"
 fi
 

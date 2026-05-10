@@ -20,12 +20,10 @@ if [ -z "$found_zsh" ]; then
     echo "Oh My Zsh could not be found. Would you like to install it? (y/n)"
     read -r response
     if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]; then
-        current_file_path=$(realpath "$0")
-        root_path=$(dirname "$current_file_path")
-        ${root_path}/install.sh
+        "$(dirname "${(%):-%x}")/install.sh"
     fi
 else
   ZSH_THEME="powerlevel10k/powerlevel10k"
   plugins+=(aliases ubuntu history zsh-autosuggestions bazel emotty)
-  source "$ZSH/oh-my-zsh.sh"
+  source "$found_zsh/oh-my-zsh.sh"
 fi

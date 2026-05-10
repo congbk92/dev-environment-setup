@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Auto-completion
-[[ $- == *i* ]] && source "$(which fzf)/../shell/completion.zsh" 2> /dev/null
-
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 # -- Use fd instead of fzf --
 
