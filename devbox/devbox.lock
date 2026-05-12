@@ -2,50 +2,50 @@
   "lockfile_version": "1",
   "packages": {
     "claude-code@latest": {
-      "last_modified": "2026-05-01T13:14:57Z",
-      "resolved": "github:NixOS/nixpkgs/c6d65881c5624c9cae5ea6cedef24699b0c0a4c0#claude-code",
+      "last_modified": "2026-05-06T02:58:03Z",
+      "resolved": "github:NixOS/nixpkgs/ed67bc86e84e51d4a88e73c7fd36006dc876476f#claude-code",
       "source": "devbox-search",
-      "version": "2.1.123",
+      "version": "2.1.128",
       "systems": {
         "aarch64-darwin": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/djgx1vfrnsi0wwb2jsazjmh3nsslz4y3-claude-code-2.1.123",
+              "path": "/nix/store/z58ki2nzhfifi4h5ss7nzi7s280zi2i0-claude-code-2.1.128",
               "default": true
             }
           ],
-          "store_path": "/nix/store/djgx1vfrnsi0wwb2jsazjmh3nsslz4y3-claude-code-2.1.123"
+          "store_path": "/nix/store/z58ki2nzhfifi4h5ss7nzi7s280zi2i0-claude-code-2.1.128"
         },
         "aarch64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/zpg2i7hz2aqxgv78ad7mm9lrc810ns5z-claude-code-2.1.123",
+              "path": "/nix/store/ls9kzv129vc2hngvxlchv832bcwsnmxd-claude-code-2.1.128",
               "default": true
             }
           ],
-          "store_path": "/nix/store/zpg2i7hz2aqxgv78ad7mm9lrc810ns5z-claude-code-2.1.123"
+          "store_path": "/nix/store/ls9kzv129vc2hngvxlchv832bcwsnmxd-claude-code-2.1.128"
         },
         "x86_64-darwin": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/yk7ggq0wwmqjlg73dl351zzh24z4ls4i-claude-code-2.1.123",
+              "path": "/nix/store/ngbwp84w003xda4dxiidarb34y973bwr-claude-code-2.1.128",
               "default": true
             }
           ],
-          "store_path": "/nix/store/yk7ggq0wwmqjlg73dl351zzh24z4ls4i-claude-code-2.1.123"
+          "store_path": "/nix/store/ngbwp84w003xda4dxiidarb34y973bwr-claude-code-2.1.128"
         },
         "x86_64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/bp04wf9h91a2rr9r8xc4n4r02y9zwkfx-claude-code-2.1.123",
+              "path": "/nix/store/0mnb6xxj635rbczw49fly0dy4m6ykbgl-claude-code-2.1.128",
               "default": true
             }
           ],
-          "store_path": "/nix/store/bp04wf9h91a2rr9r8xc4n4r02y9zwkfx-claude-code-2.1.123"
+          "store_path": "/nix/store/0mnb6xxj635rbczw49fly0dy4m6ykbgl-claude-code-2.1.128"
         }
       }
     },
@@ -234,8 +234,8 @@
       }
     },
     "git@latest": {
-      "last_modified": "2026-04-23T13:07:47Z",
-      "resolved": "github:NixOS/nixpkgs/01fbdeef22b76df85ea168fbfe1bfd9e63681b30#git",
+      "last_modified": "2026-05-06T12:40:13Z",
+      "resolved": "github:NixOS/nixpkgs/07800bee2b362f6c73fe17cb1593a260c5e183c6#git",
       "source": "devbox-search",
       "version": "2.53.0",
       "systems": {
@@ -261,12 +261,12 @@
               "default": true
             },
             {
-              "name": "debug",
-              "path": "/nix/store/rc56a3l2wby94gk9gvirpwi9hv9v15gi-git-2.53.0-debug"
-            },
-            {
               "name": "doc",
               "path": "/nix/store/q8j5mwix1g75xyq025d3hmringklm52z-git-2.53.0-doc"
+            },
+            {
+              "name": "debug",
+              "path": "/nix/store/rc56a3l2wby94gk9gvirpwi9hv9v15gi-git-2.53.0-debug"
             }
           ],
           "store_path": "/nix/store/gx9r7g2kyrjhh0zhgxz91f5nbczxh1ac-git-2.53.0"
@@ -306,8 +306,8 @@
       }
     },
     "github:NixOS/nixpkgs/nixpkgs-unstable": {
-      "last_modified": "2026-05-07T03:23:16Z",
-      "resolved": "github:NixOS/nixpkgs/68a8af93ff4297686cb68880845e61e5e2e41d92?lastModified=1778124196&narHash=sha256-pYEytCNic%2FczazbV9r3tbQ6BZzqRBg%2F41x2dIC5ymOo%3D"
+      "last_modified": "2026-05-11T00:16:55Z",
+      "resolved": "github:NixOS/nixpkgs/c6e5ca3c836a5f4dd9af9f2c1fc1c38f0fac988a?lastModified=1778458615&narHash=sha256-cY07EsdhBJ8tFXPzDYevgqxRev9ZLxFonuq9wmq5kwg%3D"
     },
     "go@latest": {
       "last_modified": "2026-04-23T13:07:47Z",
@@ -422,8 +422,8 @@
       }
     },
     "neovim@latest": {
-      "last_modified": "2026-04-28T17:03:49Z",
-      "resolved": "github:NixOS/nixpkgs/e75f25705c2934955ee5075e62530d74aca973c6#neovim",
+      "last_modified": "2026-05-07T03:23:16Z",
+      "resolved": "github:NixOS/nixpkgs/68a8af93ff4297686cb68880845e61e5e2e41d92#neovim",
       "source": "devbox-search",
       "version": "0.12.2",
       "systems": {
@@ -431,41 +431,41 @@
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/g8xn2hlw60bvqwd67dpmikh64d9phcxy-neovim-0.12.2",
+              "path": "/nix/store/k5gf5fbn9ym35v7yh6xzrz7y0ba8f0fs-neovim-0.12.2",
               "default": true
             }
           ],
-          "store_path": "/nix/store/g8xn2hlw60bvqwd67dpmikh64d9phcxy-neovim-0.12.2"
+          "store_path": "/nix/store/k5gf5fbn9ym35v7yh6xzrz7y0ba8f0fs-neovim-0.12.2"
         },
         "aarch64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/2f2rgwkmbijzqx3vicanda24plmfwdwp-neovim-0.12.2",
+              "path": "/nix/store/kp31mrl7diawnwidln8sdmhq6066cwq6-neovim-0.12.2",
               "default": true
             }
           ],
-          "store_path": "/nix/store/2f2rgwkmbijzqx3vicanda24plmfwdwp-neovim-0.12.2"
+          "store_path": "/nix/store/kp31mrl7diawnwidln8sdmhq6066cwq6-neovim-0.12.2"
         },
         "x86_64-darwin": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/f5zrw25rqr73mqxk3k5wnrf5f2657a9q-neovim-0.12.2",
+              "path": "/nix/store/2qz7hd2vjn4n09djin04pqqfz1hk2n2g-neovim-0.12.2",
               "default": true
             }
           ],
-          "store_path": "/nix/store/f5zrw25rqr73mqxk3k5wnrf5f2657a9q-neovim-0.12.2"
+          "store_path": "/nix/store/2qz7hd2vjn4n09djin04pqqfz1hk2n2g-neovim-0.12.2"
         },
         "x86_64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/2c0cf1q1aj4zq42kdr25f8xm4h5dgsb6-neovim-0.12.2",
+              "path": "/nix/store/14phl1n07zll0pg902h240kfxikl9bwy-neovim-0.12.2",
               "default": true
             }
           ],
-          "store_path": "/nix/store/2c0cf1q1aj4zq42kdr25f8xm4h5dgsb6-neovim-0.12.2"
+          "store_path": "/nix/store/14phl1n07zll0pg902h240kfxikl9bwy-neovim-0.12.2"
         }
       }
     },
@@ -836,8 +836,8 @@
       }
     },
     "zstd@latest": {
-      "last_modified": "2026-05-03T16:35:46Z",
-      "resolved": "github:NixOS/nixpkgs/73c703c22422b8951895a960959dbbaca7296492#zstd",
+      "last_modified": "2026-05-07T03:23:16Z",
+      "resolved": "github:NixOS/nixpkgs/68a8af93ff4297686cb68880845e61e5e2e41d92#zstd",
       "source": "devbox-search",
       "version": "1.5.7",
       "systems": {
@@ -854,12 +854,12 @@
               "default": true
             },
             {
-              "name": "dev",
-              "path": "/nix/store/wyxql7maladsv5hhizxj5smkapnsnhk2-zstd-1.5.7-dev"
-            },
-            {
               "name": "out",
               "path": "/nix/store/ff0aj2pp85sl42xvb2w59ynbk1330ygp-zstd-1.5.7"
+            },
+            {
+              "name": "dev",
+              "path": "/nix/store/wyxql7maladsv5hhizxj5smkapnsnhk2-zstd-1.5.7-dev"
             }
           ],
           "store_path": "/nix/store/3q6jdxwx59zhdjvgixqj3w65lgccrs2s-zstd-1.5.7-bin"
@@ -877,12 +877,12 @@
               "default": true
             },
             {
-              "name": "out",
-              "path": "/nix/store/35pysrzag4r7ybr88jka6q4w4rvm6rvn-zstd-1.5.7"
-            },
-            {
               "name": "dev",
               "path": "/nix/store/7p0vzhckiikcich963zvspqh2j4i5b1f-zstd-1.5.7-dev"
+            },
+            {
+              "name": "out",
+              "path": "/nix/store/35pysrzag4r7ybr88jka6q4w4rvm6rvn-zstd-1.5.7"
             }
           ],
           "store_path": "/nix/store/v1dk59l3vxg194ygdswhf68wgqljd700-zstd-1.5.7-bin"
