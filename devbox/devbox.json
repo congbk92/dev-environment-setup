@@ -23,7 +23,8 @@
     "gnumake@latest",
     "python314Packages.pip@latest",
     "lua5_1@latest",
-    "gcc@latest"
+    "gcc@latest",
+    "gh@latest"
   ],
   "shell": {
     "scripts": {
