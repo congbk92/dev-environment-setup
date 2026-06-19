@@ -24,7 +24,8 @@
     "python314Packages.pip@latest",
     "lua5_1@latest",
     "gcc@latest",
-    "gh@latest"
+    "gh@latest",
+    "jq@latest"
   ],
   "shell": {
     "scripts": {
