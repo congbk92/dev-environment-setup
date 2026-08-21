@@ -2,50 +2,40 @@
   "lockfile_version": "1",
   "packages": {
     "claude-code@latest": {
-      "last_modified": "2026-06-29T19:19:24Z",
-      "resolved": "github:NixOS/nixpkgs/7a1a64774a5fd0b0cd39ac95d0e170ace8b266a0#claude-code",
+      "last_modified": "2026-08-14T15:04:01Z",
+      "resolved": "github:NixOS/nixpkgs/8be7bd0c83f12e2e3bbba07c9044d6fed9e66f7f#claude-code",
       "source": "devbox-search",
-      "version": "2.1.195",
+      "version": "2.1.232",
       "systems": {
         "aarch64-darwin": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/qfkm51b6bs9q4vmp692xq5gkd3477csh-claude-code-2.1.195",
+              "path": "/nix/store/5m8yv46jak8qin8va1r2rnqsqfmsdvks-claude-code-2.1.232",
               "default": true
             }
           ],
-          "store_path": "/nix/store/qfkm51b6bs9q4vmp692xq5gkd3477csh-claude-code-2.1.195"
+          "store_path": "/nix/store/5m8yv46jak8qin8va1r2rnqsqfmsdvks-claude-code-2.1.232"
         },
         "aarch64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/acwi09d7hr29l47kxzqp07fh9fy98bag-claude-code-2.1.195",
+              "path": "/nix/store/4wk4i657a3q9gcx2h733lsqcziy1qq82-claude-code-2.1.232",
               "default": true
             }
           ],
-          "store_path": "/nix/store/acwi09d7hr29l47kxzqp07fh9fy98bag-claude-code-2.1.195"
-        },
-        "x86_64-darwin": {
-          "outputs": [
-            {
-              "name": "out",
-              "path": "/nix/store/81lkqlv7mhqq6slh1c5nklq85s8z1ri5-claude-code-2.1.195",
-              "default": true
-            }
-          ],
-          "store_path": "/nix/store/81lkqlv7mhqq6slh1c5nklq85s8z1ri5-claude-code-2.1.195"
+          "store_path": "/nix/store/4wk4i657a3q9gcx2h733lsqcziy1qq82-claude-code-2.1.232"
         },
         "x86_64-linux": {
           "outputs": [
             {
               "name": "out",
-              "path": "/nix/store/b01qcwrkl5p9va1l8bd493ird8gac53k-claude-code-2.1.195",
+              "path": "/nix/store/43fmrchzsg9g110qqk9n7a5z0icsf0qh-claude-code-2.1.232",
               "default": true
             }
           ],
-          "store_path": "/nix/store/b01qcwrkl5p9va1l8bd493ird8gac53k-claude-code-2.1.195"
+          "store_path": "/nix/store/43fmrchzsg9g110qqk9n7a5z0icsf0qh-claude-code-2.1.232"
         }
       }
     },
