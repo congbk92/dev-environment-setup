@@ -43,6 +43,7 @@ Defines globally installed packages via [devbox](https://www.jetify.com/devbox);
 | `tmux/`     | Yes       | Yes (empty) | Symlinks `tmux/.tmux.conf` → `~/.tmux.conf` |
 | `lgx/`      | No        | Yes       | Fuzzy-find git repos and open them in lazygit. `source.sh` self-installs the `~/.local/bin/lgx` symlink and binds `Ctrl+G` / `Alt+G` |
 | `herdr/`    | Yes       | No        | Symlinks `herdr/config.toml` → `~/.config/herdr/config.toml`; `prefix+f` opens an fzf directory picker and creates a workspace there |
+| `wezterm/`  | Yes       | No        | Writes Windows bootstrap that `dofile()`s repo config; defaults to WSL |
 
 ### nvim/config
 A git submodule (fork of kickstart.nvim). Custom plugins go in `nvim/config/lua/custom/plugins/`. The main `init.lua` imports from `custom.plugins` automatically.
@@ -61,6 +62,10 @@ Config (`tmux/.tmux.conf`) enables mouse, 256-color terminal, and sets escape-ti
 Config (`herdr/config.toml`) is symlinked to `~/.config/herdr/config.toml`. The custom keybinding `prefix+f` opens a popup running fzf over fd-listed directories under `~` and creates a new herdr workspace in the selected directory. Run `herdr server reload-config` after changing the config.
 
 `install.sh` also installs the [`kryptamine/herdr-auto-title`](https://github.com/kryptamine/herdr-auto-title) plugin via `herdr plugin install` (herdr clones and builds it into its own managed plugin dir; re-running replaces/updates it). The plugin loads only when the herdr server starts, so restart with `herdr server stop` after installing.
+
+### wezterm
+WezTerm is a Windows GUI app (installed separately on Windows, **not** via devbox), so its config can't be symlinked into the Linux `~`, and a directory symlink on the Windows side would need Developer Mode/admin. Instead `install.sh` writes a tiny *bootstrap* file at `%USERPROFILE%\.config\wezterm\wezterm.lua` (via `/mnt/c`, no admin needed) that `dofile()`s the repo's `wezterm/wezterm.lua` over the `\\wsl.localhost\<distro>\…` UNC path. The repo stays the single source of truth; edit it and reload WezTerm (`Ctrl+Shift+R`). The bootstrap also prepends the repo dir to `package.path`, so future `require()` of sibling modules resolves there. `wezterm.lua` sets the default domain to WSL so WezTerm opens straight into the distro. No `source.sh` — it's a GUI-app config with nothing to source into the shell.
+>>>>>>> 14e0a03 (Add wezterm)
 
 ## Key Commands
 

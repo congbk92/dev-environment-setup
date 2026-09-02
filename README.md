@@ -45,7 +45,11 @@ source ~/.zshrc
 
 Then install a [MesloLGS NF nerd font](https://github.com/romkatv/powerlevel10k?tab=readme-ov-file#meslo-nerd-font-patched-for-powerlevel10k) and run `p10k configure`.
 
+<<<<<<< HEAD
 `./install.sh` is idempotent — re-run it any time to refresh symlinks and packages.
+
+## Windows + WSL: WezTerm
+If you use WezTerm (on Windows) instead of Windows Terminal, install it on Windows, then run `./install.sh`. It writes a small bootstrap file to `%USERPROFILE%\.config\wezterm\wezterm.lua` that loads the real config (`wezterm/wezterm.lua`) from this repo, so the config stays version-controlled here. No admin or Developer Mode needed.
 
 ## ⌨️ Shortcuts
 
