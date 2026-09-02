@@ -42,6 +42,7 @@ Defines globally installed packages via [devbox](https://www.jetify.com/devbox):
 | `nvim/`     | Yes       | Yes       | Symlinks `nvim/config/` → `~/.config/nvim`; sets `$EDITOR=nvim` |
 | `oh-my-zsh/`| Yes       | Yes       | Installs Oh My Zsh + powerlevel10k theme + zsh-autosuggestions |
 | `tmux/`     | Yes       | Yes (empty) | Symlinks `tmux/.tmux.conf` → `~/.tmux.conf` |
+| `wezterm/`  | Yes       | No        | Writes Windows bootstrap that `dofile()`s repo config; defaults to WSL |
 
 ### nvim/config
 A git submodule (fork of kickstart.nvim). Custom plugins go in `nvim/config/lua/custom/plugins/`. The main `init.lua` imports from `custom.plugins` automatically.
@@ -55,6 +56,9 @@ Theme: `powerlevel10k/powerlevel10k`
 
 ### tmux
 Config (`tmux/.tmux.conf`) enables mouse, 256-color terminal, and sets escape-time to 10ms. `source.sh` exists but is empty — add tmux shell aliases/env vars there if needed.
+
+### wezterm
+WezTerm is a Windows GUI app (installed separately on Windows, **not** via devbox), so its config can't be symlinked into the Linux `~`, and a directory symlink on the Windows side would need Developer Mode/admin. Instead `install.sh` writes a tiny *bootstrap* file at `%USERPROFILE%\.config\wezterm\wezterm.lua` (via `/mnt/c`, no admin needed) that `dofile()`s the repo's `wezterm/wezterm.lua` over the `\\wsl.localhost\<distro>\…` UNC path. The repo stays the single source of truth; edit it and reload WezTerm (`Ctrl+Shift+R`). The bootstrap also prepends the repo dir to `package.path`, so future `require()` of sibling modules resolves there. `wezterm.lua` sets the default domain to WSL so WezTerm opens straight into the distro. No `source.sh` — it's a GUI-app config with nothing to source into the shell.
 
 ## Key Commands
 
