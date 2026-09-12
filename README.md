@@ -30,5 +30,8 @@ cd dev-environment-setup
 
 6. [Install nerd font](https://github.com/romkatv/powerlevel10k?tab=readme-ov-file#meslo-nerd-font-patched-for-powerlevel10k)
 
-## Windows + WSL: WezTerm
-If you use WezTerm (on Windows) instead of Windows Terminal, install it on Windows, then run `./install.sh`. It writes a small bootstrap file to `%USERPROFILE%\.config\wezterm\wezterm.lua` that loads the real config (`wezterm/wezterm.lua`) from this repo, so the config stays version-controlled here. No admin or Developer Mode needed.
+## WezTerm
+The repo config (`wezterm/wezterm.lua`) is the single source of truth in both setups:
+
+- **Windows + WSL**: install WezTerm on Windows, then run `./install.sh` from WSL. It writes a small bootstrap file to `%USERPROFILE%\.config\wezterm\wezterm.lua` that loads the repo config over the WSL UNC path. No admin or Developer Mode needed.
+- **Native Linux**: install WezTerm yourself, then run `./install.sh`. It symlinks `~/.config/wezterm/wezterm.lua` to the repo config (an existing real file there is left untouched).
