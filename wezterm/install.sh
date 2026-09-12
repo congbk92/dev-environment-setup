@@ -2,24 +2,40 @@
 
 set -euo pipefail
 
-# WezTerm is a Windows GUI app, so (unlike tmux/nvim) its config can't be
-# symlinked into the Linux home — it must live where Windows WezTerm looks:
-# %USERPROFILE%\.config\wezterm\wezterm.lua.
+# WezTerm config, one of two modes depending on where WezTerm runs. In both,
+# this repo's wezterm/wezterm.lua stays the single source of truth — edit it
+# and reload WezTerm (Ctrl+Shift+R).
 #
-# Creating a directory symlink there would need Windows Developer Mode (off by
-# default) or admin rights. Instead we write a tiny *bootstrap* file on the
-# Windows side that dofile()s the REAL config from this repo over the WSL UNC
-# path. No admin needed; the repo stays the single source of truth — edit
-# wezterm/wezterm.lua here, then reload WezTerm (Ctrl+Shift+R).
+# * Windows + WSL: WezTerm is a Windows GUI app, so (unlike tmux/nvim) its
+#   config can't be symlinked into the Linux home — it must live where Windows
+#   WezTerm looks: %USERPROFILE%\.config\wezterm\wezterm.lua. Creating a
+#   directory symlink there would need Windows Developer Mode (off by default)
+#   or admin rights. Instead we write a tiny *bootstrap* file on the Windows
+#   side that dofile()s the REAL config from this repo over the WSL UNC path.
+#   No admin needed.
+#
+# * Native Linux: WezTerm reads ~/.config/wezterm/wezterm.lua directly, so a
+#   plain symlink into the repo is all it takes.
 
 repo_wezterm="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# Windows home as a /mnt/c path we can write to directly, e.g. /mnt/c/Users/WELCOME
-userprofile="$(cmd.exe /c 'echo %USERPROFILE%' 2>/dev/null | tr -d '\r')"
+# Windows home as a /mnt/c path we can write to, e.g. /mnt/c/Users/WELCOME.
+# Empty when cmd.exe isn't reachable — i.e. not running under WSL interop.
+# (`|| true` keeps set -e from killing the script on that failure.)
+userprofile="$(cmd.exe /c 'echo %USERPROFILE%' 2>/dev/null | tr -d '\r' || true)"
+
 if [[ -z "$userprofile" ]]; then
-    echo "[wezterm] Could not resolve %USERPROFILE% — not running under WSL?" >&2
-    exit 1
+    cfg="$HOME/.config/wezterm/wezterm.lua"
+    if [ -e "$cfg" ] && [ ! -L "$cfg" ]; then
+        echo "[wezterm] $cfg already exists as a real file, skipping symlink." >&2
+        exit 0
+    fi
+    mkdir -p "$(dirname "$cfg")"
+    ln -sfnT "$repo_wezterm/wezterm.lua" "$cfg"
+    echo "[wezterm] Symlinked $cfg -> $repo_wezterm/wezterm.lua"
+    exit 0
 fi
+
 wsl_home="$(wslpath -u "$userprofile")"
 cfg_dir="$wsl_home/.config/wezterm"
 

@@ -43,7 +43,7 @@ Defines globally installed packages via [devbox](https://www.jetify.com/devbox);
 | `tmux/`     | Yes       | Yes (empty) | Symlinks `tmux/.tmux.conf` → `~/.tmux.conf` |
 | `lgx/`      | No        | Yes       | Fuzzy-find git repos and open them in lazygit. `source.sh` self-installs the `~/.local/bin/lgx` symlink and binds `Ctrl+G` / `Alt+G` |
 | `herdr/`    | Yes       | No        | Symlinks `herdr/config.toml` → `~/.config/herdr/config.toml`; `prefix+f` opens an fzf directory picker and creates a workspace there |
-| `wezterm/`  | Yes       | No        | Writes Windows bootstrap that `dofile()`s repo config; defaults to WSL |
+| `wezterm/`  | Yes       | No        | WSL: writes Windows bootstrap that `dofile()`s repo config; native Linux: symlinks into `~/.config` |
 
 ### nvim/config
 A git submodule (fork of kickstart.nvim). Custom plugins go in `nvim/config/lua/custom/plugins/`. The main `init.lua` imports from `custom.plugins` automatically.
@@ -64,8 +64,12 @@ Config (`herdr/config.toml`) is symlinked to `~/.config/herdr/config.toml`. The 
 `install.sh` also installs the [`kryptamine/herdr-auto-title`](https://github.com/kryptamine/herdr-auto-title) plugin via `herdr plugin install` (herdr clones and builds it into its own managed plugin dir; re-running replaces/updates it). The plugin loads only when the herdr server starts, so restart with `herdr server stop` after installing.
 
 ### wezterm
-WezTerm is a Windows GUI app (installed separately on Windows, **not** via devbox), so its config can't be symlinked into the Linux `~`, and a directory symlink on the Windows side would need Developer Mode/admin. Instead `install.sh` writes a tiny *bootstrap* file at `%USERPROFILE%\.config\wezterm\wezterm.lua` (via `/mnt/c`, no admin needed) that `dofile()`s the repo's `wezterm/wezterm.lua` over the `\\wsl.localhost\<distro>\…` UNC path. The repo stays the single source of truth; edit it and reload WezTerm (`Ctrl+Shift+R`). The bootstrap also prepends the repo dir to `package.path`, so future `require()` of sibling modules resolves there. `wezterm.lua` sets the default domain to WSL so WezTerm opens straight into the distro. No `source.sh` — it's a GUI-app config with nothing to source into the shell.
->>>>>>> 14e0a03 (Add wezterm)
+Dual-mode installer; the repo's `wezterm/wezterm.lua` is the single source of truth in both. Mode is detected by whether `cmd.exe` can resolve `%USERPROFILE%` (i.e. WSL interop present):
+
+- **Windows + WSL**: WezTerm is a Windows GUI app (installed separately, **not** via devbox), so its config can't be symlinked into the Linux `~`, and a directory symlink on the Windows side would need Developer Mode/admin. Instead `install.sh` writes a tiny *bootstrap* file at `%USERPROFILE%\.config\wezterm\wezterm.lua` (via `/mnt/c`, no admin needed) that `dofile()`s the repo's config over the `\\wsl.localhost\<distro>\…` UNC path. The bootstrap also prepends the repo dir to `package.path`, so future `require()` of sibling modules resolves there.
+- **Native Linux**: WezTerm reads `~/.config/wezterm/wezterm.lua` directly, so `install.sh` just symlinks it to the repo config (an existing real file there is left untouched).
+
+`wezterm.lua` sets `default_domain` (only when `wezterm.target_triple` contains `windows` — WSL domains don't exist in the Linux build) to the *first* entry of `wezterm.default_wsl_domains()`, which parses `wsl -l -v` and lists the WSL default distro (`*`-marked) first — so `wsl --set-default` controls WezTerm's startup distro, no hardcoded name. `Ctrl+Shift+Space` is bound to a fuzzy domain launcher (`ShowLauncherArgs{flags='FUZZY|DOMAINS'}`) for per-tab distro picking, shadowing QuickSelect's default binding. Edit the config and reload WezTerm (`Ctrl+Shift+R`). No `source.sh` — it's a GUI-app config with nothing to source into the shell.
 
 ## Key Commands
 
