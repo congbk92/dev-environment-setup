@@ -75,5 +75,5 @@ Dual-mode installer; the repo's `wezterm/wezterm.lua` is the single source of tr
 
 - Run full setup: `./install.sh`
 - Source all configs: `source zshrc.sh` (or add to `.zshrc`)
-- Nvim plugins: `:Lazy` in neovim to manage plugins
+- Nvim plugins: `:lua vim.pack.update()` in neovim to install/update (see `:help vim.pack`); revisions pinned in `nvim/config/nvim-pack-lock.json`
 - Nvim LSP tools: `:Mason` to manage LSP servers and formatters
