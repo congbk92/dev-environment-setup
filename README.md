@@ -6,7 +6,7 @@
   <a href="https://www.ubuntu.com"><img src="https://img.shields.io/badge/tested-Ubuntu%2022.04%20%7C%2024.04-E95420?logo=ubuntu&logoColor=white" alt="Ubuntu 22.04 | 24.04"></a>
   <a href="https://www.jetify.com/devbox"><img src="https://img.shields.io/badge/packages-devbox%20global-8B5A2B" alt="devbox global"></a>
   <a href="https://neovim.io"><img src="https://img.shields.io/badge/editor-neovim-57A143?logo=neovim&logoColor=white" alt="neovim"></a>
-  <a href="https://github.com/tmux/tmux"><img src="https://img.shields.io/badge/terminal-tmux-1BB91F?logo=tmux&logoColor=white" alt="tmux"></a>
+  <a href="https://herdr.dev"><img src="https://img.shields.io/badge/terminal-herdr-3B82F6" alt="herdr"></a>
 </p>
 
 Like its namesake, **beaver** builds its own habitat: one `devbox.json` as the source of truth for every package, a tree of symlinked configs, and idempotent installers you can re-run any time.
@@ -17,11 +17,10 @@ Like its namesake, **beaver** builds its own habitat: one `devbox.json` as the s
 |---|---|---|
 | 📦 | **devbox** | 25+ global packages (go, python, node, gh, herdr, …) from a single `devbox.json` |
 | 🐚 | **zsh** | oh-my-zsh + powerlevel10k + autosuggestions |
-| 🖥️ | **tmux** | mouse, 256-color, 10 ms escape-time |
+| 🖥️ | **herdr** | terminal workspaces — `prefix+f` fzf dir picker, auto-titled panes |
 | 📝 | **neovim** | kickstart.nvim fork (submodule) — `:Lazy` / `:Mason` ready |
 | 🔍 | **fzf + fd** | `Ctrl+T` / `Alt+C` with eza tree & bat previews |
 | 🦫 | **lgx** | `Ctrl+G` fuzzy-find a git repo → lazygit, branch + dirty status inline |
-| 🗂️ | **herdr** | `prefix+f` fzf dir picker → new workspace, auto-titled panes |
 
 ## 🚀 Quick start
 

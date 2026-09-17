@@ -41,7 +41,7 @@
     <text x="234" y="130" font-size="58" font-weight="700" fill="#e6edf3" letter-spacing="2">beaver</text>
 
     <!-- tagline -->
-    <text x="184" y="166" font-size="18" fill="#9ba4b0">the dev environment that builds itself — devbox · zsh · tmux · neovim</text>
+    <text x="184" y="166" font-size="18" fill="#9ba4b0">the dev environment that builds itself — devbox · zsh · herdr · neovim</text>
 
     <!-- prompt -->
     <text x="184" y="204" font-size="17" fill="#7aa7d8">$ ./install.sh</text>
