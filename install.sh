@@ -23,6 +23,11 @@ info "Symlinked devbox config"
 
 devbox global install
 
+# Activate the global profile so component installers can use devbox-installed
+# binaries (herdr etc.) — normally done by the shellenv line in ~/.zshrc,
+# which is not active in this shell yet
+eval "$(devbox global shellenv)"
+
 # --- Component installers ---
 step "Running component installers..."
 while IFS= read -r -d '' script <&3; do

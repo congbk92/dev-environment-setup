@@ -1,7 +1,7 @@
 # dev-environment-setup
 
 This repository contains scripts and configuration files to set up a development environment from scratch.
-Notes: It has been tested in Unbuntu 24.04 LTS and 22.04 LTS only.
+Notes: It has been tested in Ubuntu 24.04 LTS and 22.04 LTS only.
 
 ## Installation
 1. [Install Nix Package Manager](https://nixos.org/download/)

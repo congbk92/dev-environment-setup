@@ -1,3 +1,4 @@
+onboarding = false
 [ui]
 agent_panel_sort = "spaces"
 
@@ -5,5 +6,5 @@ agent_panel_sort = "spaces"
 [[keys.command]]
 key = "prefix+f"
 type = "popup"
-command = 'd=$(fd --type d . ~ | fzf) && herdr workspace create --cwd "$d" --focus'
+command = 'd=$(fd --type d --max-depth 6 . ~ | fzf) && herdr workspace create --cwd "$d" --focus'
 description = "new workspace in picked dir"

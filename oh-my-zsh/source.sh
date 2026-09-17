@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 # Possible Oh My Zsh locations to check
 possible_zsh_locations=(

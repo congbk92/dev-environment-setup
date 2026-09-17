@@ -30,8 +30,7 @@ Each component directory (`tmux/`, `oh-my-zsh/`, `nvim/`, `fzf/`, `eza/`, `lgx/`
 The entry point that discovers and sources all `source.sh` files throughout the repository. It also prepends `~/.local/bin` to `PATH`. Adding a new component only requires creating a directory with a `source.sh` file.
 
 ### devbox/devbox.json
-Defines globally installed packages via [devbox](https://www.jetify.com/devbox):
-`eza`, `tmux`, `ripgrep`, `neovim`, `fzf`, `fd`, `git`, `go`, `python`, `lazygit`, `luarocks`, `tree-sitter`, `unzip`, `zstd`, `claude-code`
+Defines globally installed packages via [devbox](https://www.jetify.com/devbox); see the file for the current list.
 
 ### Components
 
@@ -60,6 +59,8 @@ Config (`tmux/.tmux.conf`) enables mouse, 256-color terminal, and sets escape-ti
 
 ### herdr
 Config (`herdr/config.toml`) is symlinked to `~/.config/herdr/config.toml`. The custom keybinding `prefix+f` opens a popup running fzf over fd-listed directories under `~` and creates a new herdr workspace in the selected directory. Run `herdr server reload-config` after changing the config.
+
+`install.sh` also installs the [`kryptamine/herdr-auto-title`](https://github.com/kryptamine/herdr-auto-title) plugin via `herdr plugin install` (herdr clones and builds it into its own managed plugin dir; re-running replaces/updates it). The plugin loads only when the herdr server starts, so restart with `herdr server stop` after installing.
 
 ## Key Commands
 
