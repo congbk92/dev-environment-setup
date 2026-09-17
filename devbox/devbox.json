@@ -25,7 +25,8 @@
     "lua5_1@latest",
     "gcc@latest",
     "gh@latest",
-    "jq@latest"
+    "jq@latest",
+    "herdr@latest"
   ],
   "shell": {
     "scripts": {
