@@ -22,7 +22,7 @@ eval "$(fzf --zsh)"
 ## Architecture
 
 ### Component Structure
-Each component directory (`tmux/`, `oh-my-zsh/`, `nvim/`, `fzf/`, `eza/`) follows a pattern:
+Each component directory (`tmux/`, `oh-my-zsh/`, `nvim/`, `fzf/`, `eza/`, `lgx/`) follows a pattern:
 - `install.sh` - Run once during setup (creates symlinks, installs dependencies)
 - `source.sh` - Sourced by `zshrc.sh` for shell configuration (aliases, env vars, functions)
 
@@ -37,17 +37,18 @@ Defines globally installed packages via [devbox](https://www.jetify.com/devbox):
 
 | Directory   | install.sh | source.sh | Notes |
 |-------------|-----------|-----------|-------|
-| `fzf/`      | Yes       | Yes       | Installs fzf-git to `~/.local/fzf-git/`; sets FZF defaults with fd backend |
+| `fzf/`      | No        | Yes       | Sets FZF defaults with fd backend |
 | `eza/`      | No        | Yes       | Aliases `ls` to eza; adds fzf preview using eza/bat |
 | `nvim/`     | Yes       | Yes       | Symlinks `nvim/config/` → `~/.config/nvim`; sets `$EDITOR=nvim` |
 | `oh-my-zsh/`| Yes       | Yes       | Installs Oh My Zsh + powerlevel10k theme + zsh-autosuggestions |
 | `tmux/`     | Yes       | Yes (empty) | Symlinks `tmux/.tmux.conf` → `~/.tmux.conf` |
+| `lgx/`      | No        | Yes       | Fuzzy-find git repos and open them in lazygit. `source.sh` self-installs the `~/.local/bin/lgx` symlink and binds `Ctrl+G` / `Alt+G` |
 
 ### nvim/config
 A git submodule (fork of kickstart.nvim). Custom plugins go in `nvim/config/lua/custom/plugins/`. The main `init.lua` imports from `custom.plugins` automatically.
 
 ### fzf
-Uses fd as the default file finder (`FZF_DEFAULT_COMMAND`). Installs fzf-git for git-aware keybindings (e.g. `CTRL-G` prefix).
+Uses fd as the default file finder (`FZF_DEFAULT_COMMAND`). The `CTRL-G` key is bound to `lgx` by `lgx/source.sh`.
 
 ### oh-my-zsh
 Plugins enabled: `aliases`, `ubuntu`, `history`, `zsh-autosuggestions`, `bazel`, `emotty`

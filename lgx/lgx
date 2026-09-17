@@ -1,0 +1,151 @@
+#!/usr/bin/env bash
+# lgx — fuzzy-find git repos under a root dir and launch lazygit in the selected one.
+set -euo pipefail
+
+readonly DEFAULT_DEPTH=4
+
+usage() {
+  cat <<'EOF'
+lgx — fuzzy-find a git repo and open it in lazygit
+
+Usage: lgx [--root DIR] [--depth N] [-h | --help]
+
+Options:
+  --root DIR    Search for repos under DIR (default: current directory).
+  --depth N     Max subdirectory depth to scan (default: 4, env LGX_DEPTH).
+  -h, --help    Show this help.
+  --check       Verify dependencies (bash, git, fzf, lazygit; fd optional).
+
+Discovery finds every .git (directory or worktree file) under the root,
+following symlinked directories, and drops repos nested inside other found
+repos (topmost wins). The list shows
+branch, ahead/behind and a dirty marker next to each path; fzf matches on
+path and status text. Enter opens lazygit in the selected repo.
+Also bound to Ctrl+G and Alt+G by lgx/source.sh.
+
+Env:
+  LGX_DEPTH     Default for --depth.
+  LGX_LIST_ONLY If 1, print the repo list and exit (no fzf; for debugging).
+EOF
+}
+
+die() { printf 'lgx: %s\n' "$*" >&2; exit 1; }
+
+# Verify runtime dependencies; nonzero exit if a required one is missing.
+check_deps() {
+  local dep fail=0
+  for dep in bash git fzf lazygit; do
+    if command -v "$dep" >/dev/null 2>&1; then
+      printf '  %-9s %s\n' "$dep" "$("$dep" --version 2>&1 | head -1)"
+    else
+      printf '  %-9s MISSING (required)\n' "$dep"
+      fail=1
+    fi
+  done
+  if command -v fd >/dev/null 2>&1; then
+    printf '  %-9s %s (optional)\n' fd "$(fd --version 2>&1 | head -1)"
+  else
+    printf '  %-9s not found — will use find (optional)\n' fd
+  fi
+  [ $fail -eq 0 ] || printf '\ninstall hints: apt install fzf git · brew install fzf lazygit · nix-env -iA nixpkgs.fzf nixpkgs.lazygit\n' >&2
+  exit "$fail"
+}
+
+# Print the absolute path of every topmost git repo under $1, up to depth $2.
+discover_repos() {
+  local root=$1 depth=$2
+  {
+    if command -v fd >/dev/null 2>&1; then
+      # --no-ignore: never let an ancestor repo's .gitignore hide repos
+      fd --hidden --follow --no-ignore --max-depth "$depth" '^\.git$' "$root" || true
+    else
+      find -L "$root" -maxdepth "$depth" \
+        \( -name node_modules -o -name .cache -o -name target -o -name .venv \) -prune \
+        -o -name .git -prune -print || true
+    fi
+  } 2>/dev/null \
+    | sed -e 's|/\.git/$||' -e 's|/\.git$||' | sort -u | awk -v root="$root" '
+        # Drop repos nested inside another found repo (keep the topmost) —
+        # but the root repo itself must not swallow its sibling repos.
+        $0 == root { print; next }
+        { nested = 0
+          for (i in kept) if (index($0, kept[i] "/") == 1) nested = 1
+          if (!nested) { kept[NR] = $0; print }
+        }'
+}
+
+# Compact "branch↑N↓M ✓/✗" summary for one repo, from a single git call.
+status_str() {
+  local repo=$1 out first name ab n
+  out=$(git -C "$repo" status -sb 2>/dev/null) || { printf '?'; return; }
+  first=${out%%$'\n'*}          # "## main...origin/main [ahead 1, behind 2]"
+  first=${first#'## '}
+  name=${first%%...*}
+  name=${name%% (*}             # detached HEAD: "HEAD (no branch)"
+  name=${name#No commits yet on }
+  ab=''
+  if [[ $first == *'[ahead '* ]]; then
+    n=${first#*'[ahead '}; n=${n%%]*}; n=${n%%,*}; ab="↑$n"
+  fi
+  if [[ $first == *'behind '* ]]; then
+    n=${first#*'behind '}; n=${n%%]*}; n=${n%%,*}; ab="${ab}↓$n"
+  fi
+  # Lines after the branch line are porcelain entries => dirty.
+  if [[ $out == *$'\n'* ]]; then printf '%s%s ✗' "$name" "$ab"
+  else printf '%s%s ✓' "$name" "$ab"
+  fi
+}
+
+main() {
+  local root=$PWD depth=${LGX_DEPTH:-$DEFAULT_DEPTH}
+  while [ $# -gt 0 ]; do
+    case $1 in
+      --root)  [ $# -ge 2 ] || die "--root requires a directory argument"; root=$2; shift 2 ;;
+      --depth) [ $# -ge 2 ] || die "--depth requires a number argument"; depth=$2; shift 2 ;;
+      -h|--help) usage; exit 0 ;;
+      --check) check_deps ;;
+      *) die "unknown argument: $1 (see lgx --help)" ;;
+    esac
+  done
+
+  command -v fzf >/dev/null 2>&1 || die "fzf is required (https://github.com/junegunn/fzf)"
+  command -v lazygit >/dev/null 2>&1 || die "lazygit is required (https://github.com/jesseduffield/lazygit)"
+  [ -d "$root" ] || die "not a directory: $root"
+  [[ $depth =~ ^[0-9]+$ ]] || die "--depth must be a non-negative integer: $depth"
+  root=$(cd -- "$root" && pwd -P) || die "cannot resolve root: $root"
+
+  local repo rel
+  local -a entries=()
+  while IFS= read -r repo; do
+    [ -n "$repo" ] || continue
+    rel=${repo#"$root"/}
+    [ "$repo" != "$root" ] || rel=.
+    # Field 1: rel path · field 2: status · field 3: abs path (hidden from display)
+    entries+=("$rel"$'\t'"$(status_str "$repo")"$'\t'"$repo")
+  done < <(discover_repos "$root" "$depth")
+
+  [ ${#entries[@]} -gt 0 ] \
+    || die "no git repos found under $root (depth $depth) — run lgx from your repos parent dir, or: lgx --root <repos-dir>"
+
+  if [ "${LGX_LIST_ONLY:-0}" = 1 ]; then
+    printf '%s\n' "${entries[@]}"
+    exit 0
+  fi
+
+  local sel
+  # NOTE: fzf placeholders index the --with-nth-transformed line, so the hidden
+  # field 3 is unreachable here — the preview rebuilds the path from $root + {1}.
+  sel=$(printf '%s\n' "${entries[@]}" | fzf \
+        --delimiter=$'\t' --with-nth=1,2 \
+        --preview="git -C '$root/{1}' status -sb; echo; git -C '$root/{1}' log --oneline -5 2>/dev/null" \
+        --preview-window='right,55%,border-left' \
+        --header='enter: open lazygit · esc: cancel' \
+        --layout=reverse --info=inline) || exit $?   # cancelled (130): exit quietly
+
+  sel=${sel##*$'\t'}
+  [ -d "$sel" ] || die "selected path is not a directory: $sel"
+  cd -- "$sel"
+  exec lazygit
+}
+
+main "$@"
