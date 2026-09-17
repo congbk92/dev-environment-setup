@@ -1,4 +1,4 @@
-# dev-environment-setup
+# beaver
 
 This repository contains scripts and configuration files to set up a development environment from scratch.
 Notes: It has been tested in Ubuntu 24.04 LTS and 22.04 LTS only.
@@ -21,8 +21,8 @@ sudo apt install zsh
 
 4. Clone the repository and run the installation script:
 ```sh
-git clone https://github.com/congbk92/dev-environment-setup.git
-cd dev-environment-setup
+git clone https://github.com/congbk92/beaver.git
+cd beaver
 ./install.sh
 ```
 
