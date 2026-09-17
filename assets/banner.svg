@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 260" role="img" aria-label="beaver — the dev environment that builds itself">
+  <defs>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#a97142" stop-opacity="0.22"/>
+      <stop offset="1" stop-color="#a97142" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <!-- terminal window -->
+  <rect x="16" y="16" width="928" height="228" rx="16" fill="#0d1117" stroke="#262c36" stroke-width="1.5"/>
+  <line x1="17" y1="52" x2="943" y2="52" stroke="#262c36" stroke-width="1.5"/>
+  <circle cx="46" cy="34" r="6" fill="#ff5f57"/>
+  <circle cx="68" cy="34" r="6" fill="#febc2e"/>
+  <circle cx="90" cy="34" r="6" fill="#28c840"/>
+
+  <g font-family="ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, Consolas, monospace">
+    <text x="480" y="39" font-size="13" fill="#6e7681" text-anchor="middle">~/repos/beaver — zsh</text>
+
+    <!-- beaver -->
+    <ellipse cx="105" cy="150" rx="95" ry="75" fill="url(#glow)"/>
+    <circle cx="72" cy="117" r="12" fill="#7d4e24"/>
+    <circle cx="138" cy="117" r="12" fill="#7d4e24"/>
+    <circle cx="72" cy="117" r="5" fill="#55341a"/>
+    <circle cx="138" cy="117" r="5" fill="#55341a"/>
+    <ellipse cx="105" cy="150" rx="46" ry="42" fill="#a97142"/>
+    <path d="M78 156 L58 150" stroke="#dbb58b" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M78 163 L57 164" stroke="#dbb58b" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M132 156 L152 150" stroke="#dbb58b" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M132 163 L153 164" stroke="#dbb58b" stroke-width="2.2" stroke-linecap="round"/>
+    <ellipse cx="105" cy="167" rx="27" ry="21" fill="#c9a06c"/>
+    <circle cx="88" cy="140" r="6.5" fill="#160e07"/>
+    <circle cx="122" cy="140" r="6.5" fill="#160e07"/>
+    <circle cx="90" cy="138" r="1.8" fill="#ffffff"/>
+    <circle cx="124" cy="138" r="1.8" fill="#ffffff"/>
+    <ellipse cx="105" cy="158" rx="9.5" ry="7" fill="#2a1a0d"/>
+    <rect x="96.5" y="168" width="7.5" height="13" rx="2.2" fill="#f4f0e8" stroke="#d8d2c4" stroke-width="0.8"/>
+    <rect x="106" y="168" width="7.5" height="13" rx="2.2" fill="#f4f0e8" stroke="#d8d2c4" stroke-width="0.8"/>
+
+    <!-- wordmark -->
+    <text x="182" y="130" font-size="48" font-weight="700" fill="#3fb950">&#10095;</text>
+    <text x="234" y="130" font-size="58" font-weight="700" fill="#e6edf3" letter-spacing="2">beaver</text>
+
+    <!-- tagline -->
+    <text x="184" y="166" font-size="18" fill="#9ba4b0">the dev environment that builds itself — devbox · zsh · tmux · neovim</text>
+
+    <!-- prompt -->
+    <text x="184" y="204" font-size="17" fill="#7aa7d8">$ ./install.sh</text>
+    <rect x="330" y="193" width="10" height="15" fill="#3fb950">
+      <animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.5;0.5;1" dur="1.2s" repeatCount="indefinite"/>
+    </rect>
+  </g>
+</svg>
