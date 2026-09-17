@@ -22,7 +22,7 @@ eval "$(fzf --zsh)"
 ## Architecture
 
 ### Component Structure
-Each component directory (`tmux/`, `oh-my-zsh/`, `nvim/`, `fzf/`, `eza/`, `lgx/`) follows a pattern:
+Each component directory (`tmux/`, `oh-my-zsh/`, `nvim/`, `fzf/`, `eza/`, `lgx/`, `herdr/`) follows a pattern:
 - `install.sh` - Run once during setup (creates symlinks, installs dependencies)
 - `source.sh` - Sourced by `zshrc.sh` for shell configuration (aliases, env vars, functions)
 
@@ -43,6 +43,7 @@ Defines globally installed packages via [devbox](https://www.jetify.com/devbox):
 | `oh-my-zsh/`| Yes       | Yes       | Installs Oh My Zsh + powerlevel10k theme + zsh-autosuggestions |
 | `tmux/`     | Yes       | Yes (empty) | Symlinks `tmux/.tmux.conf` → `~/.tmux.conf` |
 | `lgx/`      | No        | Yes       | Fuzzy-find git repos and open them in lazygit. `source.sh` self-installs the `~/.local/bin/lgx` symlink and binds `Ctrl+G` / `Alt+G` |
+| `herdr/`    | Yes       | No        | Symlinks `herdr/config.toml` → `~/.config/herdr/config.toml`; `prefix+f` opens an fzf directory picker and creates a workspace there |
 
 ### nvim/config
 A git submodule (fork of kickstart.nvim). Custom plugins go in `nvim/config/lua/custom/plugins/`. The main `init.lua` imports from `custom.plugins` automatically.
@@ -56,6 +57,9 @@ Theme: `powerlevel10k/powerlevel10k`
 
 ### tmux
 Config (`tmux/.tmux.conf`) enables mouse, 256-color terminal, and sets escape-time to 10ms. `source.sh` exists but is empty — add tmux shell aliases/env vars there if needed.
+
+### herdr
+Config (`herdr/config.toml`) is symlinked to `~/.config/herdr/config.toml`. The custom keybinding `prefix+f` opens a popup running fzf over fd-listed directories under `~` and creates a new herdr workspace in the selected directory. Run `herdr server reload-config` after changing the config.
 
 ## Key Commands
 
