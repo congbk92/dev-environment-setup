@@ -2,6 +2,9 @@ onboarding = false
 [ui]
 agent_panel_sort = "spaces"
 
+[keys]
+detach = "prefix+d"
+
 # Pick a directory with fzf and open it as a new workspace
 [[keys.command]]
 key = "prefix+f"
